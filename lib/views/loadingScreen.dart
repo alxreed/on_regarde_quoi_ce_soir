@@ -1,7 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:onregardequoicesoir/controllers/colorController.dart';
+
+import 'loginScreen.dart';
 
 class LoadingScreen extends StatefulWidget {
   LoadingScreen({Key key}) : super(key: key);
@@ -11,6 +15,14 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
+  Timer _timer;
+
+  _LoadingScreenState() {
+    _timer = new Timer(const Duration(seconds: 2), () {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
