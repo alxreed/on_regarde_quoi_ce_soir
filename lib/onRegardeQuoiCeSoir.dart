@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:onregardequoicesoir/views/loadingScreen.dart';
+import 'package:onregardequoicesoir/views/loadingPage.dart';
 
 class OnRegardeQuoiCeSoir extends StatelessWidget {
   @override
@@ -8,7 +8,7 @@ class OnRegardeQuoiCeSoir extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'On Regarde Quoi Ce Soir',
-      home: LoadingScreen(),
+      home: LoadingPage(),
     );
   }
 }
