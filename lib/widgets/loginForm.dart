@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:onregardequoicesoir/controllers/colorController.dart';
+import 'package:onregardequoicesoir/models/loginData.dart';
 import 'package:onregardequoicesoir/widgets/titleText.dart';
 
 class LoginForm extends StatefulWidget {
@@ -8,11 +9,6 @@ class LoginForm extends StatefulWidget {
 
   @override
   _LoginFormState createState() => _LoginFormState();
-}
-
-class LoginData {
-  String email = '';
-  String password = '';
 }
 
 class _LoginFormState extends State<LoginForm> {

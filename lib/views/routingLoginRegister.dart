@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:onregardequoicesoir/views/loginPage.dart';
+import 'package:onregardequoicesoir/views/registerPage.dart';
 
 class RoutingLoginRegister extends StatefulWidget {
   RoutingLoginRegister({Key key}) : super(key: key);
@@ -26,6 +27,7 @@ class _RoutingLoginRegisterState extends State<RoutingLoginRegister> {
       controller: _controller,
       children: <Widget>[
         LoginPage(),
+        RegisterPage(),
       ],
     );
   }

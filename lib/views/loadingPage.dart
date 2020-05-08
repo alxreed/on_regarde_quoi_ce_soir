@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:onregardequoicesoir/controllers/colorController.dart';
+import 'package:onregardequoicesoir/views/routingLoginRegister.dart';
 import 'package:onregardequoicesoir/widgets/titleText.dart';
 
 import 'loginPage.dart';
@@ -20,7 +21,7 @@ class _LoadingPageState extends State<LoadingPage> {
 
   _LoadingPageState() {
     _timer = new Timer(const Duration(seconds: 2), () {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => RoutingLoginRegister()));
     });
   }
 
