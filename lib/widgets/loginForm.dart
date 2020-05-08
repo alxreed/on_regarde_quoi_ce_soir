@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:onregardequoicesoir/controllers/colorController.dart';
 import 'package:onregardequoicesoir/models/loginData.dart';
+import 'package:onregardequoicesoir/services/authService.dart';
 import 'package:onregardequoicesoir/widgets/titleText.dart';
 
 class LoginForm extends StatefulWidget {
@@ -77,17 +78,38 @@ class _LoginFormState extends State<LoginForm> {
             RaisedButton(
               padding: const EdgeInsets.all(0.0),
               onPressed: () {
-                // TODO : CONNEXION VIA FIREAUTH
+                authService.signIn(loginData).catchError((e) => _loginFailed());
               },
               child: Container(
                 padding: const EdgeInsets.all(10.0),
                 decoration: BoxDecoration(color: cursorColor),
-                child: Text("connexion".toUpperCase(), style: TextStyle(color: colorController.background),),
+                child: Text(
+                  "connexion".toUpperCase(),
+                  style: TextStyle(color: colorController.background),
+                ),
               ),
             )
           ],
         ),
       ),
     );
+  }
+
+  _loginFailed() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: Text("Sign in failed"),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('GOT IT'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
   }
 }

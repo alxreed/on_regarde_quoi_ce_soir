@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:onregardequoicesoir/controllers/colorController.dart';
 import 'package:onregardequoicesoir/models/registerData.dart';
+import 'package:onregardequoicesoir/services/authService.dart';
 import 'package:onregardequoicesoir/widgets/passwordField.dart';
 import 'package:onregardequoicesoir/widgets/titleText.dart';
 
@@ -114,7 +116,7 @@ class _RegisterFormState extends State<RegisterForm> {
               hintText: "Tape ton mot de passe",
               helperText: "8 caractères minimum",
               labelText: "Mot de passe",
-              onFieldSubmitted: (value) {
+              onSaved: (value) {
                 registerData.password = value;
               },
             ),
@@ -153,7 +155,7 @@ class _RegisterFormState extends State<RegisterForm> {
                   style: TextStyle(color: colorController.background),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -173,7 +175,8 @@ class _RegisterFormState extends State<RegisterForm> {
     if (value.isEmpty) {
       errorMsg = "Votre adresse email ne peut être vide";
     }
-    final emailExp = RegExp(r'^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$');
+    final emailExp = RegExp(
+        r'^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$');
     if (!emailExp.hasMatch(value)) {
       errorMsg = "Vous devez renseigner une adresse valide";
     }
@@ -195,7 +198,9 @@ class _RegisterFormState extends State<RegisterForm> {
   String _validatePassword(String value) {
     String errorMsg;
     final passwordField = _passwordFieldKey.currentState;
-    if (passwordField.value == null || passwordField.value.isEmpty || passwordField.value.length < 8) {
+    if (passwordField.value == null ||
+        passwordField.value.isEmpty ||
+        passwordField.value.length < 8) {
       errorMsg = "Veuillez renseigner un mot de passe valide";
     }
     if (passwordField.value != value) {
@@ -204,13 +209,13 @@ class _RegisterFormState extends State<RegisterForm> {
     return errorMsg;
   }
 
-  void _handleSubmitted() {
+  void _handleSubmitted() async {
     final form = _formKey.currentState;
     if (!form.validate()) {
       _autoValidate = true; // Start validating on every change.
     } else {
       form.save();
-      // TODO : INSCRIPTION VIA FIREAUTH
+      authService.registerUser(registerData);
     }
   }
 }
