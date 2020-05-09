@@ -101,16 +101,6 @@ class _LoginPageState extends State<LoginPage> {
                                   },
                                 ),
                               ),
-                              Container(
-                                child: FlatButton(
-                                  child: Text(
-                                    "deco",
-                                    style:
-                                    TextStyle(color: colorController.text),
-                                  ),
-                                  onPressed: (() => authService.signOut())
-                                ),
-                              )
                             ],
                           ),
                         ),

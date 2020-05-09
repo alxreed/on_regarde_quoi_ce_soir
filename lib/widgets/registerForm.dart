@@ -215,7 +215,14 @@ class _RegisterFormState extends State<RegisterForm> {
       _autoValidate = true; // Start validating on every change.
     } else {
       form.save();
-      authService.registerUser(registerData);
+      authService.registerUser(registerData).catchError((error) {
+        if (error is PlatformException) {
+          if (error.code == 'ERROR_EMAIL_ALREADY_IN_USE') {}
+          final snackBar =
+              SnackBar(content: Text('Cet utilisateur existe déjà'));
+          Scaffold.of(context).showSnackBar(snackBar);
+        }
+      });
     }
   }
 }
