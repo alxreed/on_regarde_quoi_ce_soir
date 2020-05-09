@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:onregardequoicesoir/models/loginData.dart';
@@ -8,6 +9,7 @@ import 'package:onregardequoicesoir/models/registerData.dart';
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final FacebookLogin _facebookSignIn = FacebookLogin();
   final Firestore _db = Firestore.instance;
 
   Stream<FirebaseUser> user;
@@ -57,6 +59,20 @@ class AuthService {
     updateUserData(user);
 
     print("sign in " + user.displayName);
+
+    return user;
+  }
+
+  Future<FirebaseUser> facebookSignIn() async {
+    FacebookLoginResult loginResult = await _facebookSignIn.logIn(['email']);
+
+    AuthCredential credential = FacebookAuthProvider.getCredential(
+      accessToken: loginResult.accessToken.token,
+    );
+
+    FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
+
+    updateUserData(user);
 
     return user;
   }

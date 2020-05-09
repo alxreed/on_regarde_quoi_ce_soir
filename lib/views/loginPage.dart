@@ -72,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                                     heroTag: "facebook",
                                     backgroundColor: Color(0xFF4267B2),
                                     onPressed: () {
-                                      // TODO : FACEBOOK SIGN IN
+                                      authService.facebookSignIn();
                                     },
                                     icon: Icon(
                                       FontAwesome.facebook,
