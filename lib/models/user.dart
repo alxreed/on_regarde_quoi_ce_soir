@@ -14,7 +14,6 @@ class User {
   Timestamp lastSeen;
   String photoUrl;
   List<Group> groups;
-  Movie chosenMovie;
 
   User() {
     uid = '';
@@ -24,34 +23,27 @@ class User {
     lastSeen = Timestamp.now();
     photoUrl = '';
     groups = new List<Group>();
-    chosenMovie = Movie();
   }
 
   User.fromDocumentSnapshot(DocumentSnapshot documentUser) {
-    Map<String, dynamic> map = documentUser.data;
-    uid = map["uid"];
-    surname = map["surname"];
-    name = map["displayName"];
-    email = map["email"];
-    groups = generateGroups(map["groups"]);
-    chosenMovie = generateChosenMovie(map["chosenMovie"]);
-    lastSeen = map["lastSeen"];
-    photoUrl = map["photoUrl"];
-  }
-
-  List<Group> generateGroups(List<dynamic> uids) {
-    List<Group> listOfGroups = new List<Group>();
-    uids.forEach((uid) {
-      Group group = groupController.getGroup(uid);
-    });
-    return listOfGroups;
-  }
-
-  Movie generateChosenMovie(dynamic map) {
-    Movie chosenMovie = new Movie();
-    if (map != null) {
-      chosenMovie = Movie.fromMap(map);
+    if (documentUser != null) {
+      Map<String, dynamic> map = documentUser.data;
+      uid = map["uid"];
+      surname = map["surname"];
+      name = map["displayName"];
+      email = map["email"];
+      groups = new List<Group>();
+      lastSeen = map["lastSeen"];
+      photoUrl = map["photoUrl"];
     }
-    return chosenMovie;
+  }
+
+  Future generateGroups(List<dynamic> uids) async {
+    if (uids != null || uids.isNotEmpty) {
+      uids.forEach((uid) async {
+        Group group = await groupController.getGroup(uid);
+        groups.add(group);
+      });
+    }
   }
 }

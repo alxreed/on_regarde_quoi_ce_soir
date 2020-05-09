@@ -3,9 +3,8 @@ import 'package:onregardequoicesoir/services/groupService.dart';
 
 class GroupController {
 
-  Group getGroup(String uid) {
-    Group group;
-    groupService.getGroup(uid);
+  Future<Group> getGroup(String uid) async {
+    Group group = await groupService.getGroup(uid);
     return group;
   }
 

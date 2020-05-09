@@ -6,6 +6,7 @@ import 'package:onregardequoicesoir/models/registerData.dart';
 import 'package:onregardequoicesoir/services/authService.dart';
 import 'package:onregardequoicesoir/widgets/passwordField.dart';
 import 'package:onregardequoicesoir/widgets/titleText.dart';
+import 'package:onregardequoicesoir/constants/constants.dart' as Constants;
 
 class RegisterForm extends StatefulWidget {
   RegisterForm({Key key}) : super(key: key);
@@ -149,10 +150,10 @@ class _RegisterFormState extends State<RegisterForm> {
               },
               child: Container(
                 padding: const EdgeInsets.all(10.0),
-                decoration: BoxDecoration(color: cursorColor),
+                decoration: BoxDecoration(color: Constants.red),
                 child: Text(
                   "inscription".toUpperCase(),
-                  style: TextStyle(color: colorController.background),
+                  style: TextStyle(color: Constants.white),
                 ),
               ),
             ),

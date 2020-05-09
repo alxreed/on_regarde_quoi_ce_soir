@@ -4,6 +4,7 @@ import 'package:onregardequoicesoir/controllers/colorController.dart';
 import 'package:onregardequoicesoir/models/loginData.dart';
 import 'package:onregardequoicesoir/services/authService.dart';
 import 'package:onregardequoicesoir/widgets/titleText.dart';
+import 'package:onregardequoicesoir/constants/constants.dart' as Constants;
 
 class LoginForm extends StatefulWidget {
   LoginForm({Key key}) : super(key: key);
@@ -82,10 +83,10 @@ class _LoginFormState extends State<LoginForm> {
               },
               child: Container(
                 padding: const EdgeInsets.all(10.0),
-                decoration: BoxDecoration(color: cursorColor),
+                decoration: BoxDecoration(color: Constants.red),
                 child: Text(
                   "connexion".toUpperCase(),
-                  style: TextStyle(color: colorController.background),
+                  style: TextStyle(color: Constants.white),
                 ),
               ),
             )

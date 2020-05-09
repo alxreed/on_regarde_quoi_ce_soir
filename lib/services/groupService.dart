@@ -4,13 +4,10 @@ import 'package:onregardequoicesoir/models/group.dart';
 class GroupService {
   final Firestore _db = Firestore.instance;
 
-  Group getGroup(String uid) {
+  Future<Group> getGroup(String uid) async {
     Group group;
-    _db.collection('groups').document(uid).snapshots().listen((data) {
-      print("service");
-      print(uid);
-      print(data.data);
-    });
+    DocumentSnapshot snapshot = await _db.collection('groups').document(uid).get();
+    group = Group.fromMap(snapshot.data);
     return group;
   }
 

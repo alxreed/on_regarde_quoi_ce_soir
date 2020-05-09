@@ -4,9 +4,16 @@ import 'package:onregardequoicesoir/models/user.dart';
 import 'group.dart';
 import 'movie.dart';
 
-class GroupMember extends User {
+class GroupMember {
   bool turn;
   int position;
+  String uid;
+  String surname;
+  String name;
+  String email;
+  Timestamp lastSeen;
+  String photoUrl;
+  Movie chosenMovie;
 
   GroupMember() {
     turn = false;
@@ -17,7 +24,6 @@ class GroupMember extends User {
     email = '';
     lastSeen = Timestamp.now();
     photoUrl = '';
-    groups = new List<Group>();
     chosenMovie = Movie();
   }
 
@@ -26,11 +32,18 @@ class GroupMember extends User {
     surname = map["surname"];
     name = map["displayName"];
     email = map["email"];
-    groups = generateGroups(map["groups"]);
     chosenMovie = generateChosenMovie(map["chosenMovie"]);
     lastSeen = map["lastSeen"];
     photoUrl = map["photoUrl"];
     turn = map["turn"];
     position = map["position"];
+  }
+
+  Movie generateChosenMovie(dynamic map) {
+    Movie chosenMovie = new Movie();
+    if (map != null) {
+      chosenMovie = Movie.fromMap(map);
+    }
+    return chosenMovie;
   }
 }
