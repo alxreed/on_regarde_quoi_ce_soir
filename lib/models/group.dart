@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'groupMember.dart';
 
 class Group {
@@ -12,10 +14,21 @@ class Group {
   }
 
   Group.fromMap(dynamic map) {
-    uid = map["uid"];
-    name = map["name"];
-    members = generateMembers(map["members"]);
+    if(map != null) {
+      uid = map["uid"];
+      name = map["name"];
+      members = generateMembers(map["members"]);
+    }
   }
+  Group.fromSnapshot(DocumentSnapshot snapshot) {
+    if (snapshot != null) {
+      Map<String, dynamic> map = snapshot.data;
+      uid = map["uid"];
+      name = map["name"];
+      members = generateMembers(map["members"]);
+    }
+  }
+
 
   List<GroupMember> generateMembers(List<dynamic> list) {
     List<GroupMember> members = new List<GroupMember>();

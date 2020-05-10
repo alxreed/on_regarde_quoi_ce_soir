@@ -33,7 +33,6 @@ class GroupMember {
     name = map["displayName"];
     email = map["email"];
     chosenMovie = generateChosenMovie(map["chosenMovie"]);
-    lastSeen = map["lastSeen"];
     photoUrl = map["photoUrl"];
     turn = map["turn"];
     position = map["position"];

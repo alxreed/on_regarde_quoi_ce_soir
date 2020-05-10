@@ -39,11 +39,11 @@ class _LoginFormState extends State<LoginForm> {
                   color: Colors.white,
                 ),
                 hintText: "Tape ton adresse email",
-                hintStyle: TextStyle(color: Colors.grey[700]),
+                hintStyle: TextStyle(color: Constants.grey),
                 labelText: "Email",
                 labelStyle: TextStyle(color: cursorColor),
                 enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey[700])),
+                    borderSide: BorderSide(color: Constants.grey)),
                 focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: cursorColor)),
               ),
@@ -63,11 +63,11 @@ class _LoginFormState extends State<LoginForm> {
                   color: Colors.white,
                 ),
                 hintText: "Tape ton mot de passe",
-                hintStyle: TextStyle(color: Colors.grey[700]),
+                hintStyle: TextStyle(color: Constants.grey),
                 labelText: "Mot de passe",
                 labelStyle: TextStyle(color: cursorColor),
                 enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey[700])),
+                    borderSide: BorderSide(color: Constants.grey)),
                 focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: cursorColor)),
               ),

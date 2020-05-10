@@ -48,11 +48,11 @@ class _RegisterFormState extends State<RegisterForm> {
                   color: Colors.white,
                 ),
                 hintText: "Tape ton nom ou ton pseudo",
-                hintStyle: TextStyle(color: Colors.grey[700]),
+                hintStyle: TextStyle(color: Constants.grey),
                 labelText: "Nom*",
                 labelStyle: TextStyle(color: cursorColor),
                 enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey[700])),
+                    borderSide: BorderSide(color: Constants.grey)),
                 focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: cursorColor)),
               ),
@@ -72,11 +72,11 @@ class _RegisterFormState extends State<RegisterForm> {
                   color: Colors.white,
                 ),
                 hintText: "Tape ton adresse email",
-                hintStyle: TextStyle(color: Colors.grey[700]),
+                hintStyle: TextStyle(color: Constants.grey),
                 labelText: "Email*",
                 labelStyle: TextStyle(color: cursorColor),
                 enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey[700])),
+                    borderSide: BorderSide(color: Constants.grey)),
                 focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: cursorColor)),
               ),
@@ -97,11 +97,11 @@ class _RegisterFormState extends State<RegisterForm> {
                   color: Colors.white,
                 ),
                 hintText: "Tape l'url de ta photo de profil",
-                hintStyle: TextStyle(color: Colors.grey[700]),
+                hintStyle: TextStyle(color: Constants.grey),
                 labelText: "Photo de profil",
                 labelStyle: TextStyle(color: cursorColor),
                 enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey[700])),
+                    borderSide: BorderSide(color: Constants.grey)),
                 focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: cursorColor)),
               ),
@@ -131,11 +131,11 @@ class _RegisterFormState extends State<RegisterForm> {
                   Icons.lock,
                   color: Color(0xFF212121),
                 ),
-                hintStyle: TextStyle(color: Colors.grey[700]),
+                hintStyle: TextStyle(color: Constants.grey),
                 labelText: "Retape ton mot de passesss",
                 labelStyle: TextStyle(color: cursorColor),
                 enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey[700])),
+                    borderSide: BorderSide(color: Constants.grey)),
                 focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: cursorColor)),
               ),

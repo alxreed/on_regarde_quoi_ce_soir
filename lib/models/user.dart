@@ -13,7 +13,7 @@ class User {
   String email;
   Timestamp lastSeen;
   String photoUrl;
-  List<Group> groups;
+  List<String> groupsUIDs;
 
   User() {
     uid = '';
@@ -22,7 +22,7 @@ class User {
     email = '';
     lastSeen = Timestamp.now();
     photoUrl = '';
-    groups = new List<Group>();
+    groupsUIDs = new List<String>();
   }
 
   User.fromDocumentSnapshot(DocumentSnapshot documentUser) {
@@ -32,18 +32,28 @@ class User {
       surname = map["surname"];
       name = map["displayName"];
       email = map["email"];
-      groups = new List<Group>();
+      groupsUIDs = generateGroupsUIDs(map["groups"]);
       lastSeen = map["lastSeen"];
       photoUrl = map["photoUrl"];
     }
   }
 
-  Future generateGroups(List<dynamic> uids) async {
+  generateGroupsUIDs(List<dynamic> uids) {
+    List<String> listOfUIDs = new List<String>();
+    if (uids != null || uids.isNotEmpty) {
+      uids.forEach((uid) => listOfUIDs.add(uid));
+    }
+    return listOfUIDs;
+  }
+
+  Future<List<Group>> generateGroups(List<dynamic> uids) async {
+    List<Group> listOfGroups = new List<Group>();
     if (uids != null || uids.isNotEmpty) {
       uids.forEach((uid) async {
         Group group = await groupController.getGroup(uid);
-        groups.add(group);
+        listOfGroups.add(group);
       });
     }
+    return listOfGroups;
   }
 }
