@@ -5,6 +5,8 @@ import 'package:onregardequoicesoir/services/groupService.dart';
 import 'package:onregardequoicesoir/widgets/titleText.dart';
 import 'package:onregardequoicesoir/constants/constants.dart' as Constants;
 
+import 'loader.dart';
+
 class ListMenuTile extends StatefulWidget {
   final String groupUID;
 
@@ -26,6 +28,7 @@ class _ListMenuTileState extends State<ListMenuTile> {
       builder: (context, snapshot) {
         DocumentSnapshot documentSnapshot = snapshot.data;
         Group group = Group.fromSnapshot(documentSnapshot);
+        if (!snapshot.hasData) return Container(width: 0.0, height: 0.0);
         return GestureDetector(
           child: Container(
             child: Row(
@@ -39,11 +42,16 @@ class _ListMenuTileState extends State<ListMenuTile> {
                     ),
                     Row(
                       children: <Widget>[
-                        Text("Membres: ", style: TextStyle(color: Constants.grey),),
+                        Text(
+                          "Membres: ",
+                          style: TextStyle(color: Constants.grey),
+                        ),
                         ...new List.generate(
                             group.members.length,
                             (index) => Text(
-                                "${group.members[index].surname}, ", style: TextStyle(color: Constants.grey),))
+                                  "${group.members[index].surname}, ",
+                                  style: TextStyle(color: Constants.grey),
+                                ))
                       ],
                     )
                   ],
