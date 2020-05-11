@@ -40,7 +40,7 @@ class User {
 
   generateGroupsUIDs(List<dynamic> uids) {
     List<String> listOfUIDs = new List<String>();
-    if (uids != null || uids.isNotEmpty) {
+    if (uids != null) {
       uids.forEach((uid) => listOfUIDs.add(uid));
     }
     return listOfUIDs;

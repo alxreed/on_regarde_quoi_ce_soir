@@ -37,9 +37,9 @@ class _GroupMenuState extends State<GroupMenu> {
     return StreamBuilder(
         stream: userService.getUser(widget.user.uid),
         builder: (context, snapshot) {
+          if (!snapshot.hasData) return Loader();
           DocumentSnapshot documentUser = snapshot.data;
           user = User.fromDocumentSnapshot(documentUser);
-          if (!snapshot.hasData) return Loader();
           return SafeArea(
               child: Scaffold(
             backgroundColor: colorController.background,
@@ -56,19 +56,28 @@ class _GroupMenuState extends State<GroupMenu> {
                           TitleText('mes groupes'.toUpperCase(), fontSize: 25),
                     ),
                   ),
-                  SingleChildScrollView(
-                    child: Container(
-                      height: MediaQuery.of(context).size.height * 0.65,
-                      child: Column(
-                        children: <Widget>[
-                          ...new List.generate(
-                              user.groupsUIDs.length,
-                              (index) =>
-                                  ListMenuTile(groupUID: user.groupsUIDs[index])),
-                        ],
+                  if (user.groupsUIDs.length == 0)
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 200, horizontal: 20),
+                      child: Center(
+                        child: TitleText("Vous n'avez pas encore de groupe",
+                            fontSize: 25),
                       ),
                     ),
-                  ),
+                  if (user.groupsUIDs.length > 0)
+                    SingleChildScrollView(
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * 0.65,
+                        child: Column(
+                          children: <Widget>[
+                            ...new List.generate(
+                                user.groupsUIDs.length,
+                                (index) => ListMenuTile(
+                                    groupUID: user.groupsUIDs[index])),
+                          ],
+                        ),
+                      ),
+                    ),
                 ],
               ),
             ),

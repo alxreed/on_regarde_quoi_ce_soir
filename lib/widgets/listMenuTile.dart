@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:onregardequoicesoir/models/group.dart';
 import 'package:flutter/material.dart';
 import 'package:onregardequoicesoir/services/authService.dart';
@@ -19,7 +20,7 @@ class ListMenuTile extends StatefulWidget {
 
 class _ListMenuTileState extends State<ListMenuTile> {
   FirebaseUser user;
-  
+
   @override
   initState() {
     super.initState();
@@ -35,11 +36,14 @@ class _ListMenuTileState extends State<ListMenuTile> {
     return StreamBuilder(
       stream: groupService.getStreamGroup(widget.groupUID),
       builder: (context, snapshot) {
+        if (!snapshot.hasData) return Container(width: 0.0, height: 0.0);
         DocumentSnapshot documentSnapshot = snapshot.data;
         Group group = Group.fromSnapshot(documentSnapshot);
-        if (!snapshot.hasData) return Container(width: 0.0, height: 0.0);
         return GestureDetector(
           child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+            margin: EdgeInsets.symmetric(horizontal: 35),
+            decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Constants.white))),
             child: Row(
               children: <Widget>[
                 Column(
@@ -51,12 +55,14 @@ class _ListMenuTileState extends State<ListMenuTile> {
                     ),
                     Row(
                       children: <Widget>[
-                        ...new List.generate(
-                            group.members.length,
-                            (index) => group.members[index].uid != user.uid ? Text(
-                                  "${group.members[index].surname}, ",
-                                  style: TextStyle(color: Constants.grey),
-                                ) : Text(""))
+                        ...new List.generate(group.members.length, (index) {
+                          return displaySurname(group, index);
+                        }),
+                        if (group.members.length >= 5)
+                          Text(
+                            "...",
+                            style: TextStyle(color: Constants.grey),
+                          )
                       ],
                     )
                   ],
@@ -67,5 +73,16 @@ class _ListMenuTileState extends State<ListMenuTile> {
         );
       },
     );
+  }
+
+  Text displaySurname(Group group, int index) {
+    if (group.members[index].uid != user.uid && index <= 5) {
+      return Text(
+        "${group.members[index].surname}, ",
+        style: TextStyle(color: Constants.grey),
+      );
+    } else {
+      return Text("");
+    }
   }
 }
