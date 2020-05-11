@@ -11,7 +11,6 @@ class GroupMember {
   String surname;
   String name;
   String email;
-  Timestamp lastSeen;
   String photoUrl;
   Movie chosenMovie;
 
@@ -22,7 +21,6 @@ class GroupMember {
     surname = '';
     name = '';
     email = '';
-    lastSeen = Timestamp.now();
     photoUrl = '';
     chosenMovie = Movie();
   }

@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:onregardequoicesoir/models/group.dart';
 import 'package:flutter/material.dart';
+import 'package:onregardequoicesoir/services/authService.dart';
 import 'package:onregardequoicesoir/services/groupService.dart';
 import 'package:onregardequoicesoir/widgets/titleText.dart';
 import 'package:onregardequoicesoir/constants/constants.dart' as Constants;
@@ -16,9 +18,16 @@ class ListMenuTile extends StatefulWidget {
 }
 
 class _ListMenuTileState extends State<ListMenuTile> {
+  FirebaseUser user;
+  
   @override
-  void initState() {
+  initState() {
     super.initState();
+    _initiateUser();
+  }
+
+  Future _initiateUser() async {
+    user = await authService.userLogged;
   }
 
   @override
@@ -42,16 +51,12 @@ class _ListMenuTileState extends State<ListMenuTile> {
                     ),
                     Row(
                       children: <Widget>[
-                        Text(
-                          "Membres: ",
-                          style: TextStyle(color: Constants.grey),
-                        ),
                         ...new List.generate(
                             group.members.length,
-                            (index) => Text(
+                            (index) => group.members[index].uid != user.uid ? Text(
                                   "${group.members[index].surname}, ",
                                   style: TextStyle(color: Constants.grey),
-                                ))
+                                ) : Text(""))
                       ],
                     )
                   ],
