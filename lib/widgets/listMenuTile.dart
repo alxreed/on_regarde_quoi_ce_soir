@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:onregardequoicesoir/controllers/colorController.dart';
+import 'package:onregardequoicesoir/controllers/groupController.dart';
+import 'package:onregardequoicesoir/controllers/userController.dart';
 import 'package:onregardequoicesoir/models/group.dart';
 import 'package:flutter/material.dart';
 import 'package:onregardequoicesoir/services/authService.dart';
@@ -20,10 +23,12 @@ class ListMenuTile extends StatefulWidget {
 
 class _ListMenuTileState extends State<ListMenuTile> {
   FirebaseUser user;
+  bool selected;
 
   @override
   initState() {
     super.initState();
+    selected = false;
     _initiateUser();
   }
 
@@ -40,11 +45,17 @@ class _ListMenuTileState extends State<ListMenuTile> {
         DocumentSnapshot documentSnapshot = snapshot.data;
         Group group = Group.fromSnapshot(documentSnapshot);
         return GestureDetector(
+          onLongPress: _selectGroup,
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
             margin: EdgeInsets.symmetric(horizontal: 35),
-            decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Constants.white))),
+            decoration: BoxDecoration(
+              color: selected ? Constants.red : colorController.background,
+                border: Border(
+                    bottom:
+                        BorderSide(color: colorController.text, width: 0.3))),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,12 +72,21 @@ class _ListMenuTileState extends State<ListMenuTile> {
                         if (group.members.length >= 5)
                           Text(
                             "...",
-                            style: TextStyle(color: Constants.grey),
+                            style: TextStyle(color: selected ? Constants.lightGrey : Constants.grey),
                           )
                       ],
                     )
                   ],
                 ),
+                GestureDetector(
+                  onTap: () {
+                    _deleteOrRemoveGroup(group);
+                  },
+                  child: Icon(
+                    Icons.delete,
+                    color: selected ? colorController.text : colorController.background,
+                  ),
+                )
               ],
             ),
           ),
@@ -79,10 +99,26 @@ class _ListMenuTileState extends State<ListMenuTile> {
     if (group.members[index].uid != user.uid && index <= 5) {
       return Text(
         "${group.members[index].surname}, ",
-        style: TextStyle(color: Constants.grey),
+        style: TextStyle(color: selected ? Constants.lightGrey : Constants.grey),
       );
     } else {
       return Text("");
+    }
+  }
+
+  void _selectGroup() {
+    setState(() {
+      selected = !selected;
+    });
+  }
+
+  void _deleteOrRemoveGroup(Group group) {
+    if (group.members.length == 1) {
+      groupController.deleteGroup(group.uid);
+    } else {
+      // TO DO :
+      // userController.removeGroupFromUser(user.uid, group.uid);
+      // groupController.removeUserFromGroup(group.uid, user.uid);
     }
   }
 }

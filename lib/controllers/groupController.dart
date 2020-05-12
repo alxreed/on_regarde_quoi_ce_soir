@@ -8,6 +8,10 @@ class GroupController {
     return group;
   }
 
+  void deleteGroup(String groupUid) {
+    groupService.deleteGroup(groupUid);
+  }
+
 }
 
 final GroupController groupController = new GroupController();

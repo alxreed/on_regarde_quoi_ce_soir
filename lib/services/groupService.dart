@@ -29,6 +29,10 @@ class GroupService {
   Stream getStreamGroup(String uid) {
     return _db.collection('groups').document(uid).snapshots();
   }
+
+  void deleteGroup(String groupUid) {
+    _db.collection('groups').document(groupUid).delete();
+  }
 }
 
 final GroupService groupService = new GroupService();
