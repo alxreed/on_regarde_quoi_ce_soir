@@ -15,6 +15,8 @@ import 'package:onregardequoicesoir/widgets/titleText.dart';
 import 'package:onregardequoicesoir/constants/constants.dart' as Constants;
 import 'package:onregardequoicesoir/widgets/listMenuTile.dart';
 
+import 'newGroupPage.dart';
+
 class GroupMenu extends StatefulWidget {
   final FirebaseUser user;
 
@@ -58,7 +60,8 @@ class _GroupMenuState extends State<GroupMenu> {
                   ),
                   if (user.groupsUIDs.length == 0)
                     Container(
-                      padding: EdgeInsets.symmetric(vertical: 200, horizontal: 20),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 200, horizontal: 20),
                       child: Center(
                         child: TitleText("Vous n'avez pas encore de groupe",
                             fontSize: 25),
@@ -83,13 +86,47 @@ class _GroupMenuState extends State<GroupMenu> {
             ),
             floatingActionButton: FloatingActionButton(
               backgroundColor: Constants.red,
-              onPressed: null,
+              onPressed: () {
+                _showDialog();
+              },
               child: Icon(
                 Icons.add,
                 color: Constants.white,
               ),
             ),
           ));
+        });
+  }
+
+  void _showDialog() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: Text(
+                'Veux-tu créer un nouveau groupe ou rejoindre un groupe existant ?'),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('ANNULER'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              FlatButton(
+                child: Text('REJOINDRE'),
+                onPressed: () {
+                  // TODO SEARCH EXISTING GROUP
+                },
+              ),
+              FlatButton(
+                child: Text('CREER'),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => NewGroupPage()));
+                },
+              ),
+            ],
+          );
         });
   }
 }

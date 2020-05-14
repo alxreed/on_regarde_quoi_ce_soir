@@ -5,7 +5,6 @@ import 'package:onregardequoicesoir/controllers/colorController.dart';
 import 'package:onregardequoicesoir/models/registerData.dart';
 import 'package:onregardequoicesoir/services/authService.dart';
 import 'package:onregardequoicesoir/widgets/passwordField.dart';
-import 'package:onregardequoicesoir/widgets/titleText.dart';
 import 'package:onregardequoicesoir/constants/constants.dart' as Constants;
 
 class RegisterForm extends StatefulWidget {
