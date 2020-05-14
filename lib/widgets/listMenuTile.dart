@@ -80,7 +80,7 @@ class _ListMenuTileState extends State<ListMenuTile> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    _deleteOrRemoveGroup(group);
+                    _showDialog(group);
                   },
                   child: Icon(
                     Icons.delete,
@@ -116,9 +116,34 @@ class _ListMenuTileState extends State<ListMenuTile> {
     if (group.members.length == 1) {
       groupController.deleteGroup(group.uid);
     } else {
-      // TO DO :
-      // userController.removeGroupFromUser(user.uid, group.uid);
-      // groupController.removeUserFromGroup(group.uid, user.uid);
+      userController.removeGroupFromUser(user.uid, group.uid);
+      groupController.removeUserFromGroup(group.uid, user.uid);
     }
+  }
+
+  void _showDialog(Group group) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content:
+            group.members.length == 1 ? Text('Es-tu sûr de vouloir effacer ce groupe ?') : Text('Es-tu de vouloir sortir de ce groupe ?'),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('NON'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              FlatButton(
+                child: Text('OUI'),
+                onPressed: () {
+                  _deleteOrRemoveGroup(group);
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
   }
 }

@@ -8,6 +8,12 @@ class UserService {
     return _db.collection('users').document(uid).snapshots();
   }
 
+  void removeGroupFromUser(String userUID, String groupUID) {
+    _db.collection('users').document(userUID).updateData({
+      "groups": FieldValue.arrayRemove([groupUID])
+    });
+  }
+
 }
 
 final UserService userService = new UserService();

@@ -12,6 +12,10 @@ class GroupController {
     groupService.deleteGroup(groupUid);
   }
 
+  void removeUserFromGroup(String groupUID, String userUID) {
+    groupService.removeUserFromGroup(groupUID, userUID);
+  }
+
 }
 
 final GroupController groupController = new GroupController();

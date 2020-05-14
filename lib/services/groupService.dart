@@ -33,6 +33,17 @@ class GroupService {
   void deleteGroup(String groupUid) {
     _db.collection('groups').document(groupUid).delete();
   }
+
+  Future<void> removeUserFromGroup(String groupUID, String userUID) async {
+    DocumentReference groupRef = _db.collection('groups').document(groupUID);
+    DocumentSnapshot groupSnap = await groupRef.get();
+
+    List<dynamic> members = groupSnap.data["members"];
+    members.removeWhere((member) => member["uid"] == userUID);
+
+    return groupRef.updateData({'members': members});
+
+  }
 }
 
 final GroupService groupService = new GroupService();
