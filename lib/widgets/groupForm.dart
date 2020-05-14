@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:onregardequoicesoir/controllers/colorController.dart';
 import 'package:onregardequoicesoir/models/group.dart';
 import 'package:onregardequoicesoir/constants/constants.dart' as Constants;
-
+import 'package:onregardequoicesoir/services/authService.dart';
+import 'package:onregardequoicesoir/views/groupMenu.dart';
 
 class GroupForm extends StatefulWidget {
   GroupForm({Key key}) : super(key: key);
@@ -12,10 +14,17 @@ class GroupForm extends StatefulWidget {
 
 class _GroupFormState extends State<GroupForm> {
   Group group = new Group();
+  FirebaseUser userLogged;
 
   bool _autoValidate = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    _initiateUserLogged();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +70,8 @@ class _GroupFormState extends State<GroupForm> {
                 _handleSubmitted();
               },
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                 decoration: BoxDecoration(color: Constants.red),
                 child: Text(
                   "créer".toUpperCase(),
@@ -90,8 +100,13 @@ class _GroupFormState extends State<GroupForm> {
     } else {
       form.save();
       // TO DO CREER LE GROUPE
+      Navigator.push(context, MaterialPageRoute(builder: (context) => GroupMenu(
+        user: userLogged,
+      )));
     }
   }
 
-
+  Future<void> _initiateUserLogged() async {
+    userLogged = await authService.userLogged;
+  }
 }
