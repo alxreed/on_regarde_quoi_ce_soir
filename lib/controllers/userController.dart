@@ -11,6 +11,11 @@ class UserController {
   void removeGroupFromUser(String userUID, String groupUID) {
     userService.removeGroupFromUser(userUID, groupUID);
   }
+
+  getUserMap(String uid) async {
+    Map<String, dynamic> map = await userService.getUserMap(uid);
+    return map;
+  }
 }
 
 final UserController userController = new UserController();

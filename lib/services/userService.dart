@@ -14,6 +14,12 @@ class UserService {
     });
   }
 
+  Future<Map<String, dynamic>> getUserMap(String uid) async {
+    DocumentSnapshot snapshot = await _db.collection('users').document(uid).get();
+    Map<String, dynamic> map = snapshot.data;
+    return map;
+  }
+
 }
 
 final UserService userService = new UserService();

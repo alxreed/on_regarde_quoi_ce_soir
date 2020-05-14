@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:onregardequoicesoir/controllers/userController.dart';
 import 'package:onregardequoicesoir/models/user.dart';
 
 import 'group.dart';
@@ -32,8 +33,8 @@ class GroupMember {
     email = map["email"];
     chosenMovie = generateChosenMovie(map["chosenMovie"]);
     photoUrl = map["photoUrl"];
-    turn = map["turn"];
-    position = map["position"];
+    turn = generateTurn(map["turn"]);
+    position = generatePosition(map["position"]);
   }
 
   Movie generateChosenMovie(dynamic map) {
@@ -42,5 +43,21 @@ class GroupMember {
       chosenMovie = Movie.fromMap(map);
     }
     return chosenMovie;
+  }
+
+  bool generateTurn(turnMap) {
+    bool turn = true;
+      if (turnMap != null) {
+        turn = turnMap;
+      }
+    return turn;
+  }
+
+  int generatePosition(intMap) {
+    int position = 1;
+      if (intMap != null) {
+        position = intMap;
+      }
+    return position;
   }
 }

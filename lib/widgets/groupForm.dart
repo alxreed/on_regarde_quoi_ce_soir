@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:onregardequoicesoir/controllers/colorController.dart';
+import 'package:onregardequoicesoir/controllers/groupController.dart';
 import 'package:onregardequoicesoir/models/group.dart';
 import 'package:onregardequoicesoir/constants/constants.dart' as Constants;
 import 'package:onregardequoicesoir/services/authService.dart';
@@ -64,6 +66,26 @@ class _GroupFormState extends State<GroupForm> {
               validator: _validateName,
             ),
             sizedBoxSpace,
+            TextFormField(
+              style: TextStyle(color: cursorColor),
+              cursorColor: cursorColor,
+              decoration: InputDecoration(
+                filled: true,
+                icon: const Icon(
+                  MaterialCommunityIcons.account_search,
+                  color: Colors.white,
+                ),
+                hintText: "Ajoute des nouveaux membres à ton groupe",
+                hintStyle: TextStyle(color: Constants.grey),
+                labelText: "Members",
+                labelStyle: TextStyle(color: cursorColor),
+                enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Constants.grey)),
+                focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: cursorColor)),
+              ),
+            ),
+            sizedBoxSpace,
             RaisedButton(
               padding: const EdgeInsets.all(0.0),
               onPressed: () {
@@ -108,5 +130,6 @@ class _GroupFormState extends State<GroupForm> {
 
   Future<void> _initiateUserLogged() async {
     userLogged = await authService.userLogged;
+    group.addMemberFromUid(userLogged.uid);
   }
 }
