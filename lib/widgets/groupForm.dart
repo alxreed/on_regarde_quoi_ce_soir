@@ -94,7 +94,6 @@ class _GroupFormState extends State<GroupForm> {
                           MaterialCommunityIcons.account_search,
                           color: Colors.white,
                         ),
-                        hintText: "Ajoute des nouveaux membres à ton groupe",
                         hintStyle: TextStyle(color: Constants.grey),
                         labelText: "Rechercher des membres",
                         labelStyle: TextStyle(color: cursorColor),
