@@ -96,7 +96,7 @@ class _GroupFormState extends State<GroupForm> {
                         ),
                         hintText: "Ajoute des nouveaux membres à ton groupe",
                         hintStyle: TextStyle(color: Constants.grey),
-                        labelText: "Membres",
+                        labelText: "Rechercher des membres",
                         labelStyle: TextStyle(color: cursorColor),
                         enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Constants.grey)),
