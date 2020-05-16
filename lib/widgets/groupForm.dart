@@ -113,20 +113,57 @@ class _GroupFormState extends State<GroupForm> {
                     sizedBoxSpace,
                     ListView.builder(
                         shrinkWrap: true,
+                        itemCount: usersSelected.length,
+                        itemBuilder: (context, index) {
+/*                          if (isUserDisplay(
+                              query, usersNotSelected[index].name))*/
+                          return Container(
+                            decoration: BoxDecoration(
+                                color: Constants.red.withOpacity(0.50),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30))),
+                            child: ListTile(
+                              leading: CircleAvatar(
+                                backgroundImage:
+                                    NetworkImage(usersSelected[index].photoUrl),
+                              ),
+                              trailing: GestureDetector(
+                                onTap: () {
+                                  _removeUser(usersSelected[index]);
+                                },
+                                child: Icon(
+                                  Icons.cancel,
+                                  color: colorController.text,
+                                ),
+                              ),
+                              title: Text(
+                                utils.capitalName(usersSelected[index].name),
+                                style: TextStyle(color: colorController.text),
+                              ),
+                            ),
+                          );
+                          return null;
+                        }),
+                    sizedBoxSpace,
+                    ListView.builder(
+                        shrinkWrap: true,
                         itemCount: usersToDisplay.length,
                         itemBuilder: (context, index) {
 /*                          if (isUserDisplay(
                               query, usersNotSelected[index].name))*/
-                            return ListTile(
-                              leading: CircleAvatar(
-                                backgroundImage: NetworkImage(
-                                    usersToDisplay[index].photoUrl),
-                              ),
-                              title: Text(
-                                utils.capitalName(usersToDisplay[index].name),
-                                style: TextStyle(color: colorController.text),
-                              ),
-                            );
+                          return ListTile(
+                            onTap: () {
+                              _addUser(usersToDisplay[index]);
+                            },
+                            leading: CircleAvatar(
+                              backgroundImage:
+                                  NetworkImage(usersToDisplay[index].photoUrl),
+                            ),
+                            title: Text(
+                              utils.capitalName(usersToDisplay[index].name),
+                              style: TextStyle(color: colorController.text),
+                            ),
+                          );
                           return null;
                         }),
                     sizedBoxSpace,
@@ -185,9 +222,14 @@ class _GroupFormState extends State<GroupForm> {
   void _populateUsersNotSelected(AsyncSnapshot snapshot) {
     List<String> usersNotSelectedUID = new List<String>();
     usersNotSelected.forEach((user) => usersNotSelectedUID.add(user.uid));
+
+    List<String> usersSelectedUID = new List<String>();
+    usersSelected.forEach((user) => usersSelectedUID.add(user.uid));
+
     snapshot.data.documents.forEach((userSnap) {
       if (userSnap["uid"] != userLogged.uid &&
-          !usersNotSelectedUID.contains(userSnap["uid"])) {
+          !usersNotSelectedUID.contains(userSnap["uid"]) &&
+          !usersSelectedUID.contains(userSnap["uid"])) {
         User user = User.fromDocumentSnapshot(userSnap);
         usersNotSelected.add(user);
       }
@@ -209,10 +251,26 @@ class _GroupFormState extends State<GroupForm> {
   List<User> queryingUsers(String query) {
     List<User> usersToDisplay = new List<User>();
     usersNotSelected.forEach((user) {
-      if(isUserDisplay(query, user.name)) {
+      if (isUserDisplay(query, user.name)) {
         usersToDisplay.add(user);
       }
     });
     return usersToDisplay;
+  }
+
+  void _addUser(User userToAdd) {
+    setState(() {
+      usersSelected.add(userToAdd);
+      usersNotSelected.remove(userToAdd);
+      usersToDisplay.remove(userToAdd);
+    });
+  }
+
+  void _removeUser(User usersToRemove) {
+    setState(() {
+      usersNotSelected.add(usersToRemove);
+      usersSelected.remove(usersToRemove);
+      usersToDisplay.add(usersToRemove);
+    });
   }
 }
