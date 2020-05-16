@@ -20,6 +20,10 @@ class UserService {
     return map;
   }
 
+  Stream allUsersStream() {
+    return _db.collection('users').snapshots();
+  }
+
 }
 
 final UserService userService = new UserService();

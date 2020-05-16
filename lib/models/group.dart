@@ -44,7 +44,6 @@ class Group {
 
   Future<void> addMemberFromUid(String uid) async {
     Map<String, dynamic> map = await userController.getUserMap(uid);
-    print("c'est la");
     GroupMember member = GroupMember.fromMap(map);
     members.add(member);
 
