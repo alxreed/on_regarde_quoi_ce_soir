@@ -118,6 +118,7 @@ class _GroupFormState extends State<GroupForm> {
 /*                          if (isUserDisplay(
                               query, usersNotSelected[index].name))*/
                           return Container(
+                            margin: EdgeInsets.symmetric(vertical: 2),
                             decoration: BoxDecoration(
                                 color: Constants.red.withOpacity(0.50),
                                 borderRadius:
