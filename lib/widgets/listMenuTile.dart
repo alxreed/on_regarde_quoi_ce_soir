@@ -1,3 +1,4 @@
+import 'package:basic_utils/basic_utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -98,7 +99,7 @@ class _ListMenuTileState extends State<ListMenuTile> {
   Text displaySurname(Group group, int index) {
     if (group.members[index].uid != user.uid && index <= 5) {
       return Text(
-        "${group.members[index].surname}, ",
+        "${StringUtils.capitalize(group.members[index].surname)}, ",
         style: TextStyle(color: selected ? Constants.lightGrey : Constants.grey),
       );
     } else {
