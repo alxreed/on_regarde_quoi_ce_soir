@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:onregardequoicesoir/controllers/colorController.dart';
+import 'package:onregardequoicesoir/controllers/groupController.dart';
 import 'package:onregardequoicesoir/models/group.dart';
 import 'package:onregardequoicesoir/constants/constants.dart' as Constants;
 import 'package:onregardequoicesoir/models/user.dart';
@@ -30,6 +31,8 @@ class _GroupFormState extends State<GroupForm> {
   bool _autoValidate = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  TextEditingController _controller = new TextEditingController();
 
   @override
   void initState() {
@@ -86,6 +89,7 @@ class _GroupFormState extends State<GroupForm> {
                     ),
                     sizedBoxSpace,
                     TextFormField(
+                      controller: _controller,
                       style: TextStyle(color: cursorColor),
                       cursorColor: cursorColor,
                       decoration: InputDecoration(
@@ -154,6 +158,7 @@ class _GroupFormState extends State<GroupForm> {
                           return ListTile(
                             onTap: () {
                               _addUser(usersToDisplay[index]);
+                              _controller.clear();
                             },
                             leading: CircleAvatar(
                               backgroundImage:
@@ -204,13 +209,17 @@ class _GroupFormState extends State<GroupForm> {
       _autoValidate = true; // Start validating on every change.
     } else {
       form.save();
-      // TO DO CREER LE GROUPE
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => GroupMenu(
-                    user: userLogged,
-                  )));
+      await _addSelectedUsersToTheGroup(usersSelected);
+      if (group.members.length == usersSelected.length + 1) {
+        groupController.createGroup(group);
+        // TO DO REDIRIGER VERS LE NOUVEAU GROUPE
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => GroupMenu(
+                      user: userLogged,
+                    )));
+      }
     }
   }
 
@@ -271,6 +280,12 @@ class _GroupFormState extends State<GroupForm> {
       usersNotSelected.add(usersToRemove);
       usersSelected.remove(usersToRemove);
       usersToDisplay.add(usersToRemove);
+    });
+  }
+
+  Future<void> _addSelectedUsersToTheGroup(List<User> usersSelected) async {
+    usersSelected.forEach((user) async {
+      await group.addMemberFromUid(user.uid);
     });
   }
 }

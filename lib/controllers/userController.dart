@@ -16,6 +16,10 @@ class UserController {
     Map<String, dynamic> map = await userService.getUserMap(uid);
     return map;
   }
+
+  void addGroupToUser(String uid, String newGroupUID) {
+    userService.addGroupToUser(uid, newGroupUID);
+  }
 }
 
 final UserController userController = new UserController();

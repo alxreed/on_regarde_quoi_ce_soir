@@ -24,6 +24,12 @@ class UserService {
     return _db.collection('users').snapshots();
   }
 
+  void addGroupToUser(String uid, String newGroupUID) {
+    _db.collection('users').document(uid).updateData({
+      'groups': FieldValue.arrayUnion([newGroupUID])
+    });
+  }
+
 }
 
 final UserService userService = new UserService();
