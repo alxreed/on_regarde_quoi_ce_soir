@@ -209,10 +209,10 @@ class _GroupFormState extends State<GroupForm> {
       _autoValidate = true; // Start validating on every change.
     } else {
       form.save();
-      await _addSelectedUsersToTheGroup(usersSelected);
+      _addSelectedUsersToTheGroup(usersSelected);
       if (group.members.length == usersSelected.length + 1) {
         groupController.createGroup(group);
-        // TO DO REDIRIGER VERS LE NOUVEAU GROUPE
+        // TODO REDIRIGER VERS LE NOUVEAU GROUPE
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -283,9 +283,9 @@ class _GroupFormState extends State<GroupForm> {
     });
   }
 
-  Future<void> _addSelectedUsersToTheGroup(List<User> usersSelected) async {
-    usersSelected.forEach((user) async {
-      await group.addMemberFromUid(user.uid);
-    });
+  void _addSelectedUsersToTheGroup(List<User> usersSelected) {
+    group.addMembersFromUsers(usersSelected);
   }
+
+
 }

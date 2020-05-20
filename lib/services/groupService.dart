@@ -55,12 +55,9 @@ class GroupService {
 
     for (var i = 0; i < group.members.length; i++) {
       HashMap<dynamic, dynamic> memberMap = new HashMap<dynamic, dynamic>();
-      if (i == 0) {
-        memberMap["turn"] = true;
-      } else {
-        memberMap["turn"] = false;
-      }
-      memberMap["position"] = i + 1;
+
+      memberMap["turn"] = group.members[i].turn;
+      memberMap["position"] = group.members[i].position;
       memberMap["displayName"] = group.members[i].name;
       memberMap["email"] = group.members[i].email;
       memberMap["photoUrl"] = group.members[i].photoUrl;
