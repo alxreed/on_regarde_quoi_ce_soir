@@ -9,6 +9,7 @@ import 'package:onregardequoicesoir/models/group.dart';
 import 'package:flutter/material.dart';
 import 'package:onregardequoicesoir/services/authService.dart';
 import 'package:onregardequoicesoir/services/groupService.dart';
+import 'package:onregardequoicesoir/views/groupRoutingPage.dart';
 import 'package:onregardequoicesoir/widgets/titleText.dart';
 import 'package:onregardequoicesoir/constants/constants.dart' as Constants;
 
@@ -47,6 +48,13 @@ class _ListMenuTileState extends State<ListMenuTile> {
         Group group = Group.fromSnapshot(documentSnapshot);
         return GestureDetector(
           onLongPress: _selectGroup,
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => GroupRoutingPage(group: group),
+                    ));
+          },
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
             margin: EdgeInsets.symmetric(horizontal: 35),

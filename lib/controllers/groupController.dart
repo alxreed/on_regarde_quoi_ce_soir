@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:onregardequoicesoir/controllers/userController.dart';
 import 'package:onregardequoicesoir/models/group.dart';
+import 'package:onregardequoicesoir/models/groupMember.dart';
+import 'package:onregardequoicesoir/services/authService.dart';
 import 'package:onregardequoicesoir/services/groupService.dart';
 
 class GroupController {
@@ -22,6 +25,17 @@ class GroupController {
 
     group.members.forEach((member) {userController.addGroupToUser(member.uid, newGroupUID);});
   }
+
+  GroupMember getChosenMovieMember(Group group) {
+    GroupMember chosenMovieMember;
+    group.members.forEach((member) {
+      if (member.turn) {
+        chosenMovieMember = member;
+      }
+    });
+    return chosenMovieMember;
+  }
+
 
 }
 

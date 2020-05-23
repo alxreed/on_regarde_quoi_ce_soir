@@ -11,6 +11,7 @@ import 'package:onregardequoicesoir/services/authService.dart';
 import 'package:onregardequoicesoir/services/userService.dart';
 import 'package:onregardequoicesoir/utils/utils.dart';
 import 'package:onregardequoicesoir/views/groupMenu.dart';
+import 'package:onregardequoicesoir/views/groupRoutingPage.dart';
 
 import 'loader.dart';
 
@@ -212,13 +213,10 @@ class _GroupFormState extends State<GroupForm> {
       _addSelectedUsersToTheGroup(usersSelected);
       if (group.members.length == usersSelected.length + 1) {
         groupController.createGroup(group);
-        // TODO REDIRIGER VERS LE NOUVEAU GROUPE
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => GroupMenu(
-                      user: userLogged,
-                    )));
+                builder: (context) => GroupRoutingPage(group: group)));
       }
     }
   }

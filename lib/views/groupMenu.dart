@@ -49,7 +49,7 @@ class _GroupMenuState extends State<GroupMenu> {
               child: Column(
                 children: <Widget>[
                   Container(
-                    child: AppBarOptions(),
+                    child: AppBarOptions(canAddFriends: false,),
                   ),
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 25),
