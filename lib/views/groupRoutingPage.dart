@@ -9,6 +9,7 @@ import 'package:onregardequoicesoir/services/groupService.dart';
 import 'package:onregardequoicesoir/widgets/loader.dart';
 
 import 'groupHomePage.dart';
+import 'groupMemberPage.dart';
 import 'myProfilePage.dart';
 
 class GroupRoutingPage extends StatefulWidget {
@@ -52,11 +53,13 @@ class _GroupRoutingPageState extends State<GroupRoutingPage> {
         Group group = Group.fromSnapshot(documentSnapshot);
         GroupMember chosenMovieMember = _setChosenMovieMember(group);
         GroupMember meAsGroupMember = _findUserLogged(group);
+        _removeUserLoggedFromGroup(group, meAsGroupMember);
         return PageView(
           controller: _controller,
           children: <Widget>[
             GroupHomePage(groupMember: chosenMovieMember),
             MyProfilePage(meAsGroupMember: meAsGroupMember),
+            ...new List.generate(group.members.length, (index) => GroupMemberPage(groupMember: group.members[index])),
           ],
         );
       },
@@ -75,6 +78,10 @@ class _GroupRoutingPageState extends State<GroupRoutingPage> {
       }
     });
     return userLogged;
+  }
+
+  void _removeUserLoggedFromGroup(Group group, GroupMember meAsGroupMember) {
+    group.members.remove(meAsGroupMember);
   }
 
 }
