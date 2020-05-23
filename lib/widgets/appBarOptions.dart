@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:onregardequoicesoir/controllers/colorController.dart';
+import 'package:onregardequoicesoir/controllers/groupController.dart';
 import 'package:onregardequoicesoir/services/authService.dart';
 
 class AppBarOptions extends StatefulWidget {

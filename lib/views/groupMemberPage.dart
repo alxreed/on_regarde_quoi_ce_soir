@@ -1,3 +1,4 @@
+import 'package:basic_utils/basic_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:onregardequoicesoir/controllers/colorController.dart';
 import 'package:onregardequoicesoir/models/groupMember.dart';
@@ -48,7 +49,7 @@ class _GroupMemberPageState extends State<GroupMemberPage> {
                     padding: EdgeInsets.symmetric(horizontal: 20),
                     child: Center(
                       child: TitleText(
-                          "${widget.groupMember.surname} n'a pas encore choisi de film",
+                          "${StringUtils.capitalize(widget.groupMember.surname)} n'a pas encore choisi de film",
                           fontSize: 25),
                     ),
                   ),

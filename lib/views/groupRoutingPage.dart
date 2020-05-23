@@ -51,15 +51,16 @@ class _GroupRoutingPageState extends State<GroupRoutingPage> {
         if (!snapshot.hasData) return Loader();
         DocumentSnapshot documentSnapshot = snapshot.data;
         Group group = Group.fromSnapshot(documentSnapshot);
+        groupController.group = group;
         GroupMember chosenMovieMember = _setChosenMovieMember(group);
         GroupMember meAsGroupMember = _findUserLogged(group);
-        _removeUserLoggedFromGroup(group, meAsGroupMember);
+        List<GroupMember> groupMembersRemaining = _generateGroupMembersRemaning(group, meAsGroupMember);
         return PageView(
           controller: _controller,
           children: <Widget>[
             GroupHomePage(groupMember: chosenMovieMember),
             MyProfilePage(meAsGroupMember: meAsGroupMember),
-            ...new List.generate(group.members.length, (index) => GroupMemberPage(groupMember: group.members[index])),
+            ...new List.generate(groupMembersRemaining.length, (index) => GroupMemberPage(groupMember: groupMembersRemaining[index])),
           ],
         );
       },
@@ -80,8 +81,7 @@ class _GroupRoutingPageState extends State<GroupRoutingPage> {
     return userLogged;
   }
 
-  void _removeUserLoggedFromGroup(Group group, GroupMember meAsGroupMember) {
-    group.members.remove(meAsGroupMember);
+  List<GroupMember> _generateGroupMembersRemaning(Group group, GroupMember meAsGroupMember) {
+    return group.members.where((member) => member.uid != meAsGroupMember.uid).toList();
   }
-
 }

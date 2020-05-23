@@ -1,3 +1,4 @@
+import 'package:basic_utils/basic_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:onregardequoicesoir/controllers/colorController.dart';
@@ -75,7 +76,7 @@ class _GroupHomePageState extends State<GroupHomePage> {
                         width: 10,
                       ),
                       Text(
-                        widget.groupMember.surname,
+                        StringUtils.capitalize(widget.groupMember.surname),
                         style: TextStyle(
                             color: Constants.red,
                             fontSize: 25,

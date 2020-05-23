@@ -6,6 +6,11 @@ import 'package:onregardequoicesoir/services/authService.dart';
 import 'package:onregardequoicesoir/services/groupService.dart';
 
 class GroupController {
+  Group group;
+
+  GroupController() {
+    group = new Group();
+  }
 
   Future<Group> getGroup(String uid) async {
     Group group = await groupService.getGroup(uid);
@@ -23,7 +28,9 @@ class GroupController {
   void createGroup(Group group) async {
     String newGroupUID = await groupService.createGroup(group);
 
-    group.members.forEach((member) {userController.addGroupToUser(member.uid, newGroupUID);});
+    group.members.forEach((member) {
+      userController.addGroupToUser(member.uid, newGroupUID);
+    });
   }
 
   GroupMember getChosenMovieMember(Group group) {
@@ -35,8 +42,6 @@ class GroupController {
     });
     return chosenMovieMember;
   }
-
-
 }
 
 final GroupController groupController = new GroupController();
