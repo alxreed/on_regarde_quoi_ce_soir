@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:onregardequoicesoir/constants/constants.dart' as Constants;
 
 class PasswordField extends StatefulWidget {
   const PasswordField({
@@ -46,11 +47,11 @@ class _PasswordFieldState extends State<PasswordField> {
           color: Colors.white,
         ),
         hintText: widget.hintText,
-        hintStyle: TextStyle(color: Colors.grey[700]),
+        hintStyle: TextStyle(color: Constants.grey),
         labelText: widget.labelText,
         labelStyle: TextStyle(color: Colors.white),
         enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey[700])),
+            borderSide: BorderSide(color: Constants.grey)),
         focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: Colors.white)),
         helperText: widget.helperText,

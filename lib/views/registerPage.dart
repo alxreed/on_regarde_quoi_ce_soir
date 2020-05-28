@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -14,7 +15,8 @@ class RegisterPage extends StatelessWidget {
     return StreamBuilder(
       stream: authService.user,
       builder: (context, snapshot) {
-        if(snapshot.hasData) return GroupMenu();
+        FirebaseUser firebaseUser = snapshot.data;
+        if(snapshot.hasData) return GroupMenu(user: firebaseUser,);
         return SafeArea(
             child: Scaffold(
                 backgroundColor: colorController.background,

@@ -4,6 +4,7 @@ import 'package:onregardequoicesoir/controllers/colorController.dart';
 import 'package:onregardequoicesoir/models/loginData.dart';
 import 'package:onregardequoicesoir/services/authService.dart';
 import 'package:onregardequoicesoir/widgets/titleText.dart';
+import 'package:onregardequoicesoir/constants/constants.dart' as Constants;
 
 class LoginForm extends StatefulWidget {
   LoginForm({Key key}) : super(key: key);
@@ -38,11 +39,11 @@ class _LoginFormState extends State<LoginForm> {
                   color: Colors.white,
                 ),
                 hintText: "Tape ton adresse email",
-                hintStyle: TextStyle(color: Colors.grey[700]),
+                hintStyle: TextStyle(color: Constants.grey),
                 labelText: "Email",
                 labelStyle: TextStyle(color: cursorColor),
                 enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey[700])),
+                    borderSide: BorderSide(color: Constants.grey)),
                 focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: cursorColor)),
               ),
@@ -62,11 +63,11 @@ class _LoginFormState extends State<LoginForm> {
                   color: Colors.white,
                 ),
                 hintText: "Tape ton mot de passe",
-                hintStyle: TextStyle(color: Colors.grey[700]),
+                hintStyle: TextStyle(color: Constants.grey),
                 labelText: "Mot de passe",
                 labelStyle: TextStyle(color: cursorColor),
                 enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey[700])),
+                    borderSide: BorderSide(color: Constants.grey)),
                 focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: cursorColor)),
               ),
@@ -82,10 +83,10 @@ class _LoginFormState extends State<LoginForm> {
               },
               child: Container(
                 padding: const EdgeInsets.all(10.0),
-                decoration: BoxDecoration(color: cursorColor),
+                decoration: BoxDecoration(color: Constants.red),
                 child: Text(
                   "connexion".toUpperCase(),
-                  style: TextStyle(color: colorController.background),
+                  style: TextStyle(color: Constants.white),
                 ),
               ),
             )

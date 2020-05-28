@@ -5,7 +5,7 @@ import 'package:onregardequoicesoir/controllers/colorController.dart';
 import 'package:onregardequoicesoir/models/registerData.dart';
 import 'package:onregardequoicesoir/services/authService.dart';
 import 'package:onregardequoicesoir/widgets/passwordField.dart';
-import 'package:onregardequoicesoir/widgets/titleText.dart';
+import 'package:onregardequoicesoir/constants/constants.dart' as Constants;
 
 class RegisterForm extends StatefulWidget {
   RegisterForm({Key key}) : super(key: key);
@@ -47,11 +47,11 @@ class _RegisterFormState extends State<RegisterForm> {
                   color: Colors.white,
                 ),
                 hintText: "Tape ton nom ou ton pseudo",
-                hintStyle: TextStyle(color: Colors.grey[700]),
+                hintStyle: TextStyle(color: Constants.grey),
                 labelText: "Nom*",
                 labelStyle: TextStyle(color: cursorColor),
                 enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey[700])),
+                    borderSide: BorderSide(color: Constants.grey)),
                 focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: cursorColor)),
               ),
@@ -71,11 +71,11 @@ class _RegisterFormState extends State<RegisterForm> {
                   color: Colors.white,
                 ),
                 hintText: "Tape ton adresse email",
-                hintStyle: TextStyle(color: Colors.grey[700]),
+                hintStyle: TextStyle(color: Constants.grey),
                 labelText: "Email*",
                 labelStyle: TextStyle(color: cursorColor),
                 enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey[700])),
+                    borderSide: BorderSide(color: Constants.grey)),
                 focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: cursorColor)),
               ),
@@ -96,11 +96,11 @@ class _RegisterFormState extends State<RegisterForm> {
                   color: Colors.white,
                 ),
                 hintText: "Tape l'url de ta photo de profil",
-                hintStyle: TextStyle(color: Colors.grey[700]),
+                hintStyle: TextStyle(color: Constants.grey),
                 labelText: "Photo de profil",
                 labelStyle: TextStyle(color: cursorColor),
                 enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey[700])),
+                    borderSide: BorderSide(color: Constants.grey)),
                 focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: cursorColor)),
               ),
@@ -130,11 +130,11 @@ class _RegisterFormState extends State<RegisterForm> {
                   Icons.lock,
                   color: Color(0xFF212121),
                 ),
-                hintStyle: TextStyle(color: Colors.grey[700]),
+                hintStyle: TextStyle(color: Constants.grey),
                 labelText: "Retape ton mot de passesss",
                 labelStyle: TextStyle(color: cursorColor),
                 enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey[700])),
+                    borderSide: BorderSide(color: Constants.grey)),
                 focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: cursorColor)),
               ),
@@ -149,10 +149,10 @@ class _RegisterFormState extends State<RegisterForm> {
               },
               child: Container(
                 padding: const EdgeInsets.all(10.0),
-                decoration: BoxDecoration(color: cursorColor),
+                decoration: BoxDecoration(color: Constants.red),
                 child: Text(
                   "inscription".toUpperCase(),
-                  style: TextStyle(color: colorController.background),
+                  style: TextStyle(color: Constants.white),
                 ),
               ),
             ),

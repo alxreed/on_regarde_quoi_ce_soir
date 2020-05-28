@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:onregardequoicesoir/controllers/colorController.dart';
+import 'package:onregardequoicesoir/models/user.dart';
 import 'package:onregardequoicesoir/services/authService.dart';
 import 'package:onregardequoicesoir/views/registerPage.dart';
 import 'package:onregardequoicesoir/widgets/loginForm.dart';
@@ -21,7 +23,8 @@ class _LoginPageState extends State<LoginPage> {
     return StreamBuilder(
         stream: authService.user,
         builder: (context, snapshot) {
-          if(snapshot.hasData) return GroupMenu();
+          FirebaseUser firebaseUser = snapshot.data;
+          if (snapshot.hasData) return GroupMenu(user: firebaseUser);
           return SafeArea(
               child: Scaffold(
                   backgroundColor: colorController.background,
@@ -72,7 +75,9 @@ class _LoginPageState extends State<LoginPage> {
                                     heroTag: "facebook",
                                     backgroundColor: Color(0xFF4267B2),
                                     onPressed: () {
-                                      authService.facebookSignIn();
+                                      authService
+                                          .facebookSignIn()
+                                          .catchError((e) => _loginFailed());
                                     },
                                     icon: Icon(
                                       FontAwesome.facebook,
