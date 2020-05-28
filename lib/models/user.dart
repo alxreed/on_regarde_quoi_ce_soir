@@ -38,6 +38,16 @@ class User {
     }
   }
 
+  User.fromMap(Map<String, dynamic> map) {
+    uid = map["uid"];
+    surname = map["surname"];
+    name = map["displayName"];
+    email = map["email"];
+    groupsUIDs = generateGroupsUIDs(map["groups"]);
+    lastSeen = map["lastSeen"];
+    photoUrl = map["photoUrl"];
+  }
+
   generateGroupsUIDs(List<dynamic> uids) {
     List<String> listOfUIDs = new List<String>();
     if (uids != null) {

@@ -98,6 +98,10 @@ class GroupService {
     
     groupRef.updateData({'members': FieldValue.arrayUnion([memberMap])});
   }
+
+  Stream allGroupsStream() {
+    return _db.collection('groups').snapshots();
+  }
   
 }
 

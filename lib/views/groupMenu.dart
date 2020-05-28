@@ -9,6 +9,7 @@ import 'package:onregardequoicesoir/models/user.dart';
 import 'package:onregardequoicesoir/services/authService.dart';
 import 'package:onregardequoicesoir/services/groupService.dart';
 import 'package:onregardequoicesoir/services/userService.dart';
+import 'package:onregardequoicesoir/views/joinExistingGroup.dart';
 import 'package:onregardequoicesoir/widgets/appBarOptions.dart';
 import 'package:onregardequoicesoir/widgets/loader.dart';
 import 'package:onregardequoicesoir/widgets/titleText.dart';
@@ -118,7 +119,10 @@ class _GroupMenuState extends State<GroupMenu> {
               FlatButton(
                 child: Text('REJOINDRE'),
                 onPressed: () {
-                  // TODO SEARCH EXISTING GROUP
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => JoinExistingGroup()));
                 },
               ),
               FlatButton(
