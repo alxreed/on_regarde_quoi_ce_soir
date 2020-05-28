@@ -51,7 +51,7 @@ class _GroupRoutingPageState extends State<GroupRoutingPage> {
         if (!snapshot.hasData) return Loader();
         DocumentSnapshot documentSnapshot = snapshot.data;
         Group group = Group.fromSnapshot(documentSnapshot);
-        groupController.group = group;
+        groupService.group = group;
         GroupMember chosenMovieMember = _setChosenMovieMember(group);
         GroupMember meAsGroupMember = _findUserLogged(group);
         List<GroupMember> groupMembersRemaining = _generateGroupMembersRemaning(group, meAsGroupMember);

@@ -32,6 +32,7 @@ class _GroupMenuState extends State<GroupMenu> {
   void initState() {
     super.initState();
     user = User();
+    _setUserLogged();
   }
 
   @override
@@ -49,7 +50,9 @@ class _GroupMenuState extends State<GroupMenu> {
               child: Column(
                 children: <Widget>[
                   Container(
-                    child: AppBarOptions(canAddFriends: false,),
+                    child: AppBarOptions(
+                      canAddFriends: false,
+                    ),
                   ),
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 25),
@@ -128,5 +131,10 @@ class _GroupMenuState extends State<GroupMenu> {
             ],
           );
         });
+  }
+
+  void _setUserLogged() async {
+    FirebaseUser userLogged = await authService.userLogged;
+    authService.userSet = userLogged;
   }
 }

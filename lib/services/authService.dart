@@ -14,6 +14,7 @@ class AuthService {
 
   Stream<FirebaseUser> user;
   Future<FirebaseUser> userLogged;
+  FirebaseUser userSet;
 
   AuthService() {
     user = _auth.onAuthStateChanged;

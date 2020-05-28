@@ -119,8 +119,6 @@ class _GroupFormState extends State<GroupForm> {
                         shrinkWrap: true,
                         itemCount: usersSelected.length,
                         itemBuilder: (context, index) {
-/*                          if (isUserDisplay(
-                              query, usersNotSelected[index].name))*/
                           return Container(
                             margin: EdgeInsets.symmetric(vertical: 2),
                             decoration: BoxDecoration(
@@ -212,7 +210,7 @@ class _GroupFormState extends State<GroupForm> {
       form.save();
       _addSelectedUsersToTheGroup(usersSelected);
       if (group.members.length == usersSelected.length + 1) {
-        groupController.createGroup(group);
+        group.uid = await groupController.createGroup(group);
         Navigator.push(
             context,
             MaterialPageRoute(

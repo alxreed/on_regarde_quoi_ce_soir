@@ -2,9 +2,17 @@ import 'dart:collection';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:onregardequoicesoir/models/group.dart';
+import 'package:onregardequoicesoir/models/groupMember.dart';
 import 'package:onregardequoicesoir/services/userService.dart';
 
 class GroupService {
+
+  Group group;
+
+  GroupService() {
+    group = new Group();
+  }
+
   final Firestore _db = Firestore.instance;
 
   Future<Group> getGroup(String uid) async {
@@ -75,6 +83,22 @@ class GroupService {
 
     return groupRef.documentID;
   }
+
+  void addNewMembersToTheGroup(GroupMember member, String uid) {
+    DocumentReference groupRef = _db.collection('groups').document(uid);
+    HashMap<dynamic, dynamic> memberMap = new HashMap<dynamic, dynamic>();
+
+    memberMap["turn"] = member.turn;
+    memberMap["position"] = member.position;
+    memberMap["displayName"] = member.name;
+    memberMap["email"] = member.email;
+    memberMap["photoUrl"] = member.photoUrl;
+    memberMap["surname"] = member.surname;
+    memberMap["uid"] = member.uid;
+    
+    groupRef.updateData({'members': FieldValue.arrayUnion([memberMap])});
+  }
+  
 }
 
 final GroupService groupService = new GroupService();

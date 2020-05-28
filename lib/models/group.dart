@@ -50,11 +50,12 @@ class Group {
   }
 
   void addMembersFromUsers(List<User> usersSelected) {
+    int lastPositionMember = members.last.position;
     for (var i = 0; i < usersSelected.length; i++) {
       GroupMember groupMember = new GroupMember();
 
       groupMember.turn = false;
-      groupMember.position = i + 2;
+      groupMember.position = lastPositionMember + i + 1;
       groupMember.name = usersSelected[i].name;
       groupMember.email = usersSelected[i].email;
       groupMember.photoUrl = usersSelected[i].photoUrl;
